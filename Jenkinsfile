@@ -30,7 +30,7 @@ podTemplate(label: 'docker-build',
         stage('Build'){
             container('docker'){
                 script {
-                    appImage = docker.build("sck1990/node-hello-world")
+                    appImage = docker.build("sck1990/ci_cd")
                 }
             }
         }
