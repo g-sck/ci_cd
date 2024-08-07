@@ -3,7 +3,6 @@ podTemplate(label: 'docker-build',
     containerTemplate(
       name: 'git',
       image: 'alpine/git',
-      args "-u root",
       command: 'cat',
       ttyEnabled: true
     ),
@@ -34,6 +33,7 @@ podTemplate(label: 'docker-build',
         stage('Build'){
             container('docker'){
                 script {
+                    args "-u root",
                     appImage = docker.build("sck1990/node-hello-world")
                     step([
                         $class: 'com.amazon.inspector.jenkins.amazoninspectorbuildstep.AmazonInspectorBuilder',
