@@ -3,12 +3,14 @@ podTemplate(label: 'docker-build',
     containerTemplate(
       name: 'git',
       image: 'alpine/git',
+      args "-u root",
       command: 'cat',
       ttyEnabled: true
     ),
     containerTemplate(
       name: 'docker',
       image: 'docker',
+      args "-u root",
       command: 'cat',
       ttyEnabled: true
     ),
