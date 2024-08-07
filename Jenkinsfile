@@ -26,18 +26,25 @@ podTemplate(label: 'docker-build',
                 checkout scm
             }
         }
+        
+
+        stage('Build'){
+            container('docker'){
+                script {
+                    appImage = docker.build("sck1990/node-hello-world")
+                }
+            }
+        }
+        
         stage('amazon-inspector-image-scanner') {
            steps {
                script {
                step([
                $class: 'com.amazon.inspector.jenkins.amazoninspectorbuildstep.AmazonInspectorBuilder',
                sbomgenSource: '/var/jenkins_home/inspector-sbomgen-1.3.2/linux/amd64', // this can be linuxAmd64 or linuxArm64
-               archivePath: 'IMAGE_PATH',
+               archivePath: 'sck1990/node-hello-world',
                awsRegion: 'ap-northeast-2',
-               iamRole: 'IAM ROLE',
-               credentialId: '', // provide empty string if image not in private repositories
                awsCredentialId: '3c90cd59-0160-46f9-bce3-8a51d4103f56',
-               awsProfileName: 'Profile Name',
                isThresholdEnabled: false,
                countCritical: 0,
                countHigh: 0,
@@ -48,14 +55,6 @@ podTemplate(label: 'docker-build',
         }
       }
 
-        stage('Build'){
-            container('docker'){
-                script {
-                    appImage = docker.build("sck1990/node-hello-world")
-                }
-            }
-        }
-        
         stage('Test'){
             container('docker'){
                 script {
