@@ -15,7 +15,7 @@ podTemplate(label: 'docker-build',
   ],
   volumes: [ 
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
-    
+
   ]
 ) {
     node('docker-build') {
@@ -55,7 +55,7 @@ podTemplate(label: 'docker-build',
             container('docker'){
                 script {
                     appImage.inside {
-                        //sh 'npm install'
+                        sh 'npm install'
                         //sh 'npm test'
                     }
                 }
