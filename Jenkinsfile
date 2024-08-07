@@ -55,7 +55,7 @@ podTemplate(label: 'docker-build',
             container('docker'){
                 script {
                     appImage.inside {
-                        bash 'npm install'
+                        sh 'npm install'
                         //sh 'npm test'
                     }
                 }
