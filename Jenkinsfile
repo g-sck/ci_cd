@@ -73,7 +73,7 @@ pipeline {
                awsRegion: 'ap-northeast-2',
                iamRole: 'IAM ROLE',
                credentialId: '', // provide empty string if image not in private repositories
-               awsCredentialId: ''AWS ID;',
+               awsCredentialId: '3c90cd59-0160-46f9-bce3-8a51d4103f56',
                awsProfileName: 'Profile Name',
                isThresholdEnabled: false,
                countCritical: 0,
