@@ -59,3 +59,30 @@ podTemplate(label: 'docker-build',
     }
     
 }
+
+pipeline {
+   agent any
+   stages {
+       stage('amazon-inspector-image-scanner') {
+           steps {
+               script {
+               step([
+               $class: 'com.amazon.inspector.jenkins.amazoninspectorbuildstep.AmazonInspectorBuilder',
+               sbomgenSource: '/inspector-sbomgen-1.3.2/linux/amd64', // this can be linuxAmd64 or linuxArm64
+               archivePath: 'IMAGE_PATH',
+               awsRegion: 'ap-northeast-2',
+               iamRole: 'IAM ROLE',
+               credentialId: '', // provide empty string if image not in private repositories
+               awsCredentialId: ''AWS ID;',
+               awsProfileName: 'Profile Name',
+               isThresholdEnabled: false,
+               countCritical: 0,
+               countHigh: 0,
+               countLow: 10,
+               countMedium: 5,
+              ])
+           }
+        }
+      }
+   }
+ }
